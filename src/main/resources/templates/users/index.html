@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Start page</title>
+    <style>table th, table td {padding: 20px;}</style>
+
+</head>
+<body>
+<h1>Users list</h1>
+<table border="1">
+    <tr>
+        <th>index</th>
+        <th>id</th>
+        <th>name</th>
+        <th>secondName</th>
+        <th>number</th>
+        <th>e-mail</th>
+    </tr>
+    <tr th:each="User, state : ${userList}">
+        <td th:utext="${state.index}">index</td>
+        <td th:utext="${User.getId()}"></td>
+        <td th:utext="${User.getName()}"></td>
+        <td th:utext="${User.getSecondName()}"></td>
+        <td th:utext="${User.getNumber()}"></td>
+        <td th:utext="${User.getMail()}"></td>
+        <td>
+            <a th:href="@{/users/edit/{id}(id = ${User.getId()})}">Edit</a>
+            <a th:href="@{/users/delete/{id}(id = ${User.getId()})}">Delete</a>
+        </td>
+    </tr>
+</table>
+<br/>
+<br/>
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="name">Enter name:       </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="secondName">Enter second name: </label>
+    <input type="text" th:field="*{secondName}" id="secondName"/>
+    <br/>
+    <label for="number">Enter number:        </label>
+    <input type="text" th:field="*{number}" id="number"/>
+    <br/>
+    <label for="mail">Enter e-mail:      </label>
+    <input type="text" th:field="*{mail}" id="mail"/>
+    <br/>
+
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+
+
+
+</body>
+</html>
