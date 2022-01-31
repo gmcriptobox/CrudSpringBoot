@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
         <label for="name">Enter name:       </label>
         <input type="text" th:field="*{name}" id="name"/>
         <br/>
@@ -20,10 +20,21 @@
         <label for="mail">Enter e-mail:      </label>
         <input type="text" th:field="*{mail}" id="mail"/>
         <br/>
-
+        <label for="userName">Enter user name:      </label>
+        <input type="text" th:field="*{userName}" id="userName"/>
+        <br/>
+        <label for="role">Enter role:</label>
+        <select multiple class="form-control" id="role" name="role">
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+        </select>
+        <br/>
         <input type="submit" value="Update"/>
-    </form>
 
+</form>
 
+<form th:method="GET" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

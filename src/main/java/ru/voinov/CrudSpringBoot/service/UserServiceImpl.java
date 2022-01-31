@@ -1,8 +1,12 @@
 package ru.voinov.CrudSpringBoot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.voinov.CrudSpringBoot.dao.RoleRepository;
 import ru.voinov.CrudSpringBoot.dao.UserDao;
 import ru.voinov.CrudSpringBoot.model.User;
 
@@ -10,7 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDao userDao;
@@ -24,13 +28,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> listUsers() {
-        List<User> list = userDao.getAllUsers();
-        return list;
+        return userDao.getAllUsers();
     }
 
     @Override
-    public void deteleById(long id) {
+    public void deleteById(long id) {
         userDao.deleteById(id);
+    }
+
+    @Override
+    public User getUserByUserName(String userName){
+        return userDao.getUserByUserName(userName);
     }
 
     @Override
@@ -45,6 +53,8 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.getUserByUserName(username);
+    }
 }

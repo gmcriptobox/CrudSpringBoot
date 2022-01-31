@@ -16,6 +16,8 @@
         <th>secondName</th>
         <th>number</th>
         <th>e-mail</th>
+        <th>login</th>
+        <th>roles</th>
     </tr>
     <tr th:each="User, state : ${userList}">
         <td th:utext="${state.index}">index</td>
@@ -24,15 +26,16 @@
         <td th:utext="${User.getSecondName()}"></td>
         <td th:utext="${User.getNumber()}"></td>
         <td th:utext="${User.getMail()}"></td>
+        <td th:utext="${User.getUserName()}"></td>
         <td>
-            <a th:href="@{/users/edit/{id}(id = ${User.getId()})}">Edit</a>
-            <a th:href="@{/users/delete/{id}(id = ${User.getId()})}">Delete</a>
+            <a th:href="@{/admin/edit/{id}(id = ${User.getId()})}">Edit</a>
+            <a th:href="@{/admin/delete/{id}(id = ${User.getId()})}">Delete</a>
         </td>
     </tr>
 </table>
 <br/>
 <br/>
-<form th:method="POST" th:action="@{/users}" th:object="${user}">
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
     <label for="name">Enter name:       </label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
@@ -45,14 +48,23 @@
     <label for="mail">Enter e-mail:      </label>
     <input type="text" th:field="*{mail}" id="mail"/>
     <br/>
-
+    <label for="userName">Enter username:      </label>
+    <input type="text" th:field="*{userName}" id="userName"/>
+    <br/>
+    <label for="password">Enter password:      </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <label for="role">Enter role:</label>
+    <select multiple class="form-control" id="role" name="role">
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+    </select>
+    <br/>
     <input type="submit" value="Create"/>
 </form>
 
-<br/>
-
-
-
-
+<form th:method="GET" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>
