@@ -52,12 +52,20 @@ public class AdminController {
     @PatchMapping("/{id}")
     public String editUser(@ModelAttribute("user")User user,
                            @PathVariable ("id")long id, @RequestParam(name = "role", required = false) String[] roles){
-        Set<Role> rolesSet = new HashSet<>();
-        for(String s: roles){
-            rolesSet.add(roleService.findByName(s));
+        if(roles.length > 0){
+            Set<Role> rolesSet = new HashSet<>();
+            for(String s: roles){
+                rolesSet.add(roleService.findByName(s));
+            }
+            user.setRoles(rolesSet);
+        } else{
+            user.setRoles(userService.getUserById(user.getId()).getRoles());
         }
-        user.setRoles(rolesSet);
-        user.setPassword(userService.getUserById(user.getId()).getPassword());
+        if(user.getPassword().equals("")){
+            user.setPassword(userService.getUserById(user.getId()).getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userService.update(id, user);
         return "redirect:/admin";
     }
