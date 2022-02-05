@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User getUserByUserName(String userName){
-        return userDao.getUserByUserName(userName);
+    public User getUserByEmail(String userName){
+        return userDao.getUserByEmail(userName);
     }
 
     @Override
@@ -55,6 +55,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao.getUserByUserName(username);
+        return getUserByEmail(username);
     }
 }

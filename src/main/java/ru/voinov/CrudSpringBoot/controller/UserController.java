@@ -16,19 +16,16 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final RoleService roleService;
 
     @Autowired
-    public UserController(UserService userService,RoleService roleService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
 
     @GetMapping()
     public String index(Model model, Principal principal){
-        model.addAttribute("user", userService.getUserByUserName(principal.getName()));
-        model.addAttribute("roles", roleService.getAllRole());
-        return "user/index";
+        model.addAttribute("user", userService.getUserByEmail(principal.getName()));
+        return "user/userPanel";
     }
 }

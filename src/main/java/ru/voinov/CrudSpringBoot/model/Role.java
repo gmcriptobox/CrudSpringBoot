@@ -56,6 +56,10 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
+    public String getNameHtml() {
+        return name + " ";
+    }
+
 
     @Override
     public String getAuthority() {

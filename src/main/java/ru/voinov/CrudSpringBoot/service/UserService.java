@@ -7,7 +7,7 @@ public interface UserService {
     void add(User user);
     List<User> listUsers();
     User getUserById(long id);
-    User getUserByUserName(String userName);
+    User getUserByEmail(String userName);
     void deleteById(long id);
     void update(long id, User userUpdater);
 
