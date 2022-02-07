@@ -15,9 +15,9 @@
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3" href="#" >
-        <b th:utext="${user.getMail()}"></b>
+        <b id="userMail"></b>
         <lable>with roles:</lable>
-        <lable th:text = "${user.getRolesString()}"></lable>
+        <lable id="roleUser" ></lable>
     </a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -73,17 +73,9 @@
                                     <th scope="col">roles</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td th:utext="${user.getId()}"></td>
-                                    <td th:utext="${user.getName()}"></td>
-                                    <td th:utext="${user.getSecondName()}"></td>
-                                    <td th:utext="${user.getAge()}"></td>
-                                    <td th:utext="${user.getMail()}"></td>
-                                    <td th:utext="${user.getRolesString()}"></td>
-                                </tr>
-                                </tbody>
+                                <tbody id="tableBody">
 
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -107,5 +99,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="./header.js"></script>
+<script type="text/javascript" src="./userTable.js"></script>
 </body>
 </html>
